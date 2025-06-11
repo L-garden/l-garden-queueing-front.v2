@@ -1,0 +1,104 @@
+def APP_PROFILE
+def APP_NAME
+def APP_VERSION
+def DOCKER_IMAGE_NAME
+def COPY_DOCKER_COMPOSE
+
+pipeline {
+    agent any
+
+    parameters {
+        gitParameter branch: '',
+                branchFilter: '.*',
+                defaultValue: 'origin/main',
+                description: '',
+                listSize: '0',
+                name: 'TAG',
+                quickFilterEnabled: false,
+                selectedValue: 'DEFAULT',
+                sortMode: 'DESCENDING_SMART',
+                tagFilter: '*',
+                type: 'PT_BRANCH_TAG'
+        booleanParam defaultValue: false, description: '', name: 'COPY_DOCKER_COMPOSE'
+    }
+
+    environment {
+        GIT_URL = "https://github.com/L-garden/l-garden-queueing-front.v2.git"
+        GITHUB_CREDENTIAL = "github-token"
+        DOCKER_REGISTRY = "ghcr.io/L-garden"
+        SSH_HOST = credentials('QUEUEING_FRONTEND_SSH_HOST')
+        SSH_PORT = credentials('QUEUEING_FRONTEND_SSH_PORT')
+        SSH_USER = credentials('QUEUEING_FRONTEND_SSH_USER')
+        SSH_PASS = credentials('QUEUEING_FRONTEND_SSH_PASS')
+    }
+
+    options {
+        disableConcurrentBuilds()
+        buildDiscarder(logRotator(numToKeepStr: "30", artifactNumToKeepStr: "30"))
+        timeout(time: 120, unit: 'MINUTES')
+    }
+
+    tools {
+        NodeJs 'NodeJs'
+        Docker "docker"
+    }
+
+    stages {
+        stage('Set Name & Version') {
+            steps {
+                script {
+                    APP_NAME = sh(
+                        script: "npm pkg get name | sed 's/\"//g'",
+                        returnStdout: true
+                    ).trim()
+                    APP_VERSION = sh(
+                        script: "npm pkg get version | sed 's/\"//g'",
+                        returnStdout: true
+                    ).trim()
+                    DOCKER_IMAGE_NAME = "${DOCKER_REGISTRY}/${APP_NAME}:${APP_VERSION}"
+                }
+
+                sh "echo DOCKER_IMAGE_NAME is ${DOCKER_IMAGE_NAME}"
+            }
+        }
+
+        stage('Build Application') {
+            steps {
+                if (APP_PROFILE == "onprem") {
+                    sh "npm i"
+                    sh "npm run build:onprem"
+                } else {
+                    error("Profile을 다시 확인해주세요")
+                }
+            }
+        }
+
+        stage('Build image') {
+            steps {
+                script {
+                    docker.build(
+                            "${DOCKER_IMAGE_NAME}",
+                            "--file .docker/Dockerfile ."
+                    )
+                }
+            }
+        }
+
+        stage('Copy docker-compose') {
+            steps {
+                if(COPY_DOCKER_COMPOSE == true) {
+                    sh '''
+                    sshpass -p $SSH_PASS scp -P $SSH_PORT -o StrictHostKeyChecking=no ./.docker/docker-compose-nginx.yaml $SSH_USER@$SSH_HOST:/home/queueing/frontend/docker-compose-nginx.yaml
+                    '''
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh "cd frontend"
+                sh "TAG=${APP_VERSION} docker compose -f docker-compose-nginx.yaml up -d"
+            }
+        }
+    }
+}
