@@ -1,8 +1,6 @@
-def APP_PROFILE
 def APP_NAME
 def APP_VERSION
 def DOCKER_IMAGE_NAME
-def COPY_DOCKER_COMPOSE
 
 pipeline {
     agent any
@@ -19,7 +17,8 @@ pipeline {
                 sortMode: 'DESCENDING_SMART',
                 tagFilter: '*',
                 type: 'PT_BRANCH_TAG'
-        booleanParam defaultValue: false, description: '', name: 'COPY_DOCKER_COMPOSE'
+        booleanParam(defaultValue: false, description: '', name: 'COPY_DOCKER_COMPOSE')
+        string(defaultValue: 'onprem', description: '', name: 'APP_PROFILE')
     }
 
     environment {
@@ -48,12 +47,12 @@ pipeline {
             steps {
                 script {
                     APP_NAME = sh(
-                        script: "npm pkg get name | sed 's/\"//g'",
-                        returnStdout: true
+                            script: "npm pkg get name | sed 's/\"//g'",
+                            returnStdout: true
                     ).trim()
                     APP_VERSION = sh(
-                        script: "npm pkg get version | sed 's/\"//g'",
-                        returnStdout: true
+                            script: "npm pkg get version | sed 's/\"//g'",
+                            returnStdout: true
                     ).trim()
                     DOCKER_IMAGE_NAME = "${DOCKER_REGISTRY}/${APP_NAME}:${APP_VERSION}"
                 }
@@ -64,11 +63,13 @@ pipeline {
 
         stage('Build Application') {
             steps {
-                if (APP_PROFILE == "onprem") {
-                    sh "npm i"
-                    sh "npm run build:onprem"
-                } else {
-                    error("Profile을 다시 확인해주세요")
+                script {
+                    if (params.APP_PROFILE == "onprem") {
+                        sh "npm i"
+                        sh "npm run build:onprem"
+                    } else {
+                        error("Profile을 다시 확인해주세요")
+                    }
                 }
             }
         }
@@ -86,18 +87,24 @@ pipeline {
 
         stage('Copy docker-compose') {
             steps {
-                if(COPY_DOCKER_COMPOSE == true) {
-                    sh '''
-                    sshpass -p $SSH_PASS scp -P $SSH_PORT -o StrictHostKeyChecking=no ./.docker/docker-compose-nginx.yaml $SSH_USER@$SSH_HOST:/home/queueing/frontend/docker-compose-nginx.yaml
-                    '''
+                script {
+                    if (params.COPY_DOCKER_COMPOSE == true) {
+                        sh '''
+                        sshpass -p $SSH_PASS scp -P $SSH_PORT -o StrictHostKeyChecking=no ./.docker/docker-compose-nginx.yaml $SSH_USER@$SSH_HOST:/home/queueing/frontend/docker-compose-nginx.yaml
+                        '''
+                    }
                 }
             }
         }
 
         stage('Deploy') {
             steps {
-                sh "cd frontend"
-                sh "TAG=${APP_VERSION} docker compose -f docker-compose-nginx.yaml up -d"
+                script {
+                    sh '''
+                    sshpass -p $SSH_PASS ssh -p $SSH_PORT $SSH_USER@$SSH_HOST cd frontend; \
+                    TAG=$APP_VERSION docker compose -f docker-compose-nginx.yaml up -d
+                    '''
+                }
             }
         }
     }
