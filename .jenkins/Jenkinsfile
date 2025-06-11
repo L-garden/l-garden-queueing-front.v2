@@ -22,9 +22,9 @@ pipeline {
     }
 
     environment {
-        GIT_URL = "https://github.com/L-garden/l-garden-queueing-front.v2.git"
+        GIT_URL = "https://github.com/l-garden/l-garden-queueing-front.v2.git"
         GITHUB_CREDENTIAL = "github-token"
-        DOCKER_REGISTRY = "ghcr.io/L-garden"
+        DOCKER_REGISTRY = "ghcr.io/l-garden"
         SSH_HOST = credentials('QUEUEING_FRONTEND_SSH_HOST')
         SSH_PORT = credentials('QUEUEING_FRONTEND_SSH_PORT')
         SSH_USER = credentials('QUEUEING_FRONTEND_SSH_USER')
