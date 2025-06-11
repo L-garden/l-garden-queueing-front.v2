@@ -95,6 +95,7 @@ export default function Home() {
             width={16}
             height={16}
           />
+          {`${process.env.NEXT_PUBLIC_TEST_VALUE}`}
           Go to nextjs.org →
         </a>
       </footer>
