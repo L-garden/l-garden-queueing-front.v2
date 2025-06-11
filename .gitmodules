@@ -1,0 +1,3 @@
+[submodule "env"]
+	path = env
+	url = https://github.com/L-garden/l-garden-queueing-front.v2.env.git
