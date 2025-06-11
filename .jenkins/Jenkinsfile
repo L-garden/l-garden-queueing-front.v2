@@ -17,13 +17,15 @@ pipeline {
                 sortMode: 'DESCENDING_SMART',
                 tagFilter: '*',
                 type: 'PT_BRANCH_TAG'
-        booleanParam(defaultValue: false, description: '', name: 'COPY_DOCKER_COMPOSE')
+        booleanParam(defaultValue: true, description: '', name: 'COPY_DOCKER_COMPOSE')
         string(defaultValue: 'onprem', description: '', name: 'APP_PROFILE')
     }
 
     environment {
         GIT_URL = "https://github.com/l-garden/l-garden-queueing-front.v2.git"
         GITHUB_CREDENTIAL = "github-token"
+        GITHUB_REGISTRY_TOKEN = credentials('GITHUB_REGISTRY_TOKEN')
+        GITHUB_USERNAME = credentials('GITHUB_USERNAME')
         DOCKER_REGISTRY = "ghcr.io/l-garden"
         SSH_HOST = credentials('QUEUEING_FRONTEND_SSH_HOST')
         SSH_PORT = credentials('QUEUEING_FRONTEND_SSH_PORT')
@@ -85,12 +87,23 @@ pipeline {
             }
         }
 
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    docker.withRegistry("https://ghcr.io", GITHUB_CREDENTIAL) {
+                        docker.image("${DOCKER_IMAGE_NAME}").push()
+                    }
+                    sh "docker rmi ${DOCKER_IMAGE_NAME}"
+                }
+            }
+        }
+
         stage('Copy docker-compose') {
             steps {
                 script {
                     if (params.COPY_DOCKER_COMPOSE == true) {
                         sh '''
-                        sshpass -p $SSH_PASS scp -P $SSH_PORT -o StrictHostKeyChecking=no ./.docker/docker-compose-nginx.yaml $SSH_USER@$SSH_HOST:/home/queueing/frontend/docker-compose-nginx.yaml
+                        sshpass -p $SSH_PASS scp -v -P $SSH_PORT -o StrictHostKeyChecking=no ./.docker/docker-compose-nginx.yaml $SSH_USER@$SSH_HOST:/home/queueing/frontend/docker-compose-nginx.yaml
                         '''
                     }
                 }
@@ -100,10 +113,12 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    sh '''
-                    sshpass -p $SSH_PASS ssh -p $SSH_PORT $SSH_USER@$SSH_HOST cd frontend; \
-                    TAG=$APP_VERSION docker compose -f docker-compose-nginx.yaml up -d
-                    '''
+                    println(APP_VERSION)
+                    sh """
+                    sshpass -p $SSH_PASS ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "echo ${env.GITHUB_REGISTRY_TOKEN} | docker login ghcr.io -u ${env.GITHUB_USERNAME} --password-stdin; \
+                        TAG=${APP_VERSION} docker compose -f ./frontend/docker-compose-nginx.yaml up -d
+                        "
+                    """
                 }
             }
         }

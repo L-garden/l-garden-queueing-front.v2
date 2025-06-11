@@ -1,6 +1,6 @@
 services:
   nginx:
     container_name: queueing-nginx
-    image: ghcr/l-garden/l-garden-queueing-front.v2:${TAG}
+    image: ghcr.io/l-garden/l-garden-queueing-front.v2:${TAG}
     ports:
       - 80:80
