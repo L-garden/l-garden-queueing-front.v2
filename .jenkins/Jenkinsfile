@@ -39,8 +39,8 @@ pipeline {
     }
 
     tools {
-        NodeJs "NodeJs 24.2.0"
-        Docker "docker"
+        nodejs "NodeJs 24.2.0"
+        dockerTool "docker"
     }
 
     stages {
