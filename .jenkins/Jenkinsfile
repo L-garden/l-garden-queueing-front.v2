@@ -39,7 +39,7 @@ pipeline {
     }
 
     tools {
-        NodeJs 'NodeJs'
+        NodeJs "NodeJs 24.2.0"
         Docker "docker"
     }
 
