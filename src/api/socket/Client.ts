@@ -12,6 +12,7 @@ const getSocketClient = (endPoint?: string, reconnectDelay?: number) => {
 
 export const useSocketClient = (
     subEndpoint: string,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     subCallback: (data: any) => void,
     stompEndpoint?: string
 ) => {

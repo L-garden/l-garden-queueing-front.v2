@@ -1,6 +1,6 @@
 {
   "name": "l-garden-queueing-front.v2",
-  "version": "0.1.2",
+  "version": "0.2.1",
   "private": true,
   "scripts": {
     "dev": "env-cmd -f env/.env.dev next dev --turbopack",
@@ -14,9 +14,12 @@
     "@types/stompjs": "^2.3.9",
     "env-cmd": "^10.1.0",
     "next": "15.3.3",
+    "next-intl": "^4.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "sockjs-client": "^1.6.1"
+    "react-icons": "^5.5.0",
+    "sockjs-client": "^1.6.1",
+    "styled-components": "^6.1.18"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

@@ -12,6 +12,7 @@ export const baseGet = (path: string) => {
     });
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const basePost = (path: string, body: any) => {
     return fetch(`${SERVER_URL}${path}`, {
         method: "POST",
