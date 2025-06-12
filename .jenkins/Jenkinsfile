@@ -19,6 +19,7 @@ pipeline {
                 tagFilter: '*',
                 type: 'PT_BRANCH_TAG'
         booleanParam(defaultValue: true, description: '', name: 'COPY_DOCKER_COMPOSE')
+        booleanParam(defaultValue: true, description: '', name: 'IS_SSR')
         string(defaultValue: 'onprem', description: '', name: 'APP_PROFILE')
     }
 
@@ -100,10 +101,18 @@ pipeline {
             }
             steps {
                 script {
-                    docker.build(
-                            "${DOCKER_IMAGE_NAME}",
-                            "--file .docker/Dockerfile ."
-                    )
+                    if(params.IS_SSR == true) {
+                        docker.build(
+                                "${DOCKER_IMAGE_NAME}",
+                                "--file .docker/Dockerfile-ssr ."
+                        )
+                    }
+                    else {
+                        docker.build(
+                                "${DOCKER_IMAGE_NAME}",
+                                "--file .docker/Dockerfile ."
+                        )
+                    }
                 }
             }
         }
@@ -124,11 +133,16 @@ pipeline {
 
         stage('Copy docker-compose') {
             when {
-                expression {NEED_DEPLOY == true}
+                expression {NEED_DEPLOY == true && params.COPY_DOCKER_COMPOSE == true}
             }
             steps {
                 script {
-                    if (params.COPY_DOCKER_COMPOSE == true) {
+                    if(params.IS_SSR == true) {
+                        sh '''
+                        sshpass -p $SSH_PASS scp -v -P $SSH_PORT -o StrictHostKeyChecking=no ./.docker/docker-compose-next-ssr.yaml $SSH_USER@$SSH_HOST:/home/queueing/frontend/docker-compose-next-ssr.yaml
+                        '''
+                    }
+                    else {
                         sh '''
                         sshpass -p $SSH_PASS scp -v -P $SSH_PORT -o StrictHostKeyChecking=no ./.docker/docker-compose-nginx.yaml $SSH_USER@$SSH_HOST:/home/queueing/frontend/docker-compose-nginx.yaml
                         '''
@@ -143,12 +157,23 @@ pipeline {
             }
             steps {
                 script {
-                    println(APP_VERSION)
-                    sh """
-                    sshpass -p $SSH_PASS ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "echo ${env.GITHUB_REGISTRY_TOKEN} | docker login ghcr.io -u ${env.GITHUB_USERNAME} --password-stdin; \
-                        TAG=${APP_VERSION} docker compose -f ./frontend/docker-compose-nginx.yaml up -d
-                        "
-                    """
+                    if(params.IS_SSR == true) {
+                        println(APP_VERSION)
+                        sh """
+                        sshpass -p $SSH_PASS ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "echo ${env.GITHUB_REGISTRY_TOKEN} | docker login ghcr.io -u ${env.GITHUB_USERNAME} --password-stdin; \
+                            TAG=${APP_VERSION} docker compose -f ./frontend/docker-compose-next-ssr.yaml up -d
+                            "
+                        """
+                    }
+                    else {
+                        println(APP_VERSION)
+                        sh """
+                        sshpass -p $SSH_PASS ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "echo ${env.GITHUB_REGISTRY_TOKEN} | docker login ghcr.io -u ${env.GITHUB_USERNAME} --password-stdin; \
+                            TAG=${APP_VERSION} docker compose -f ./frontend/docker-compose-nginx.yaml up -d
+                            docker system prune -af
+                            "
+                        """
+                    }
                 }
             }
         }

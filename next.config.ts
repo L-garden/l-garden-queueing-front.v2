@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
     compiler: {
         styledComponents: true,
     },
-    output: process.env.NODE_ENV === "production" ? 'export' : undefined,
+    output: process.env.NODE_ENV === "production" ? 'standalone' : undefined,
 };
 
 export default withNextIntl(nextConfig);

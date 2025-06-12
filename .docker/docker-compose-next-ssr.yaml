@@ -1,0 +1,6 @@
+services:
+  next:
+    container_name: queueing-next
+    image: ghcr.io/l-garden/l-garden-queueing-front.v2:${TAG}
+    ports:
+      - 80:3000
