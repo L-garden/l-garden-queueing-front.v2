@@ -3,16 +3,20 @@
   "version": "0.1.2",
   "private": true,
   "scripts": {
-    "dev": "env-cmd -f env/.env next dev --turbopack",
+    "dev": "env-cmd -f env/.env.dev next dev --turbopack",
     "build:onprem": "env-cmd -f env/.env.onprem next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@stomp/stompjs": "^7.1.1",
+    "@types/sockjs-client": "^1.5.4",
+    "@types/stompjs": "^2.3.9",
     "env-cmd": "^10.1.0",
     "next": "15.3.3",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "sockjs-client": "^1.6.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
