@@ -19,4 +19,6 @@ export type AdminRole = "CEO" | "ADMIN" | "DEVELOPER";
 export interface SetSettingStatusProp {
     setSettingStatus: Dispatch<SetStateAction<SettingStatus>>;
     adminRole?: AdminRole;
+    adminName?: string | undefined;
+    setAdminName?: Dispatch<SetStateAction<string | undefined>>;
 }

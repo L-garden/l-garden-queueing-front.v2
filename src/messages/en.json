@@ -47,7 +47,10 @@
           "idPlaceholder": "id",
           "name": "name",
           "namePlaceholder": "name",
-          "addAdmin": "Add Admin"
+          "addAdmin": "Add Admin",
+          "done": "{name}\nAdded",
+          "unknown": "Unknown",
+          "back": "back"
         }
       }
     },

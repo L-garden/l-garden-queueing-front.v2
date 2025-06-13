@@ -10,6 +10,8 @@ import AdminSettingAdminChangeContent
 import AdminSettingAdminChangeDeniedContent
     from "@/component/modalContent/adminSetting/adminChange/AdminSettingAdminChangeDeniedContent";
 import AdminSettingAddAdminContent from "@/component/modalContent/adminSetting/addAdmin/AdminSettingAddAdminContent";
+import AdminSettingAddAdminDoneContent
+    from "@/component/modalContent/adminSetting/addAdmin/AdminSettingAddAdminDoneContent";
 
 interface AdminSettingProp {
     hiddenModal: boolean;
@@ -18,8 +20,10 @@ interface AdminSettingProp {
 
 export default ({hiddenModal, adminRole}: AdminSettingProp) => {
     const [settingStatus, setSettingStatus] = useState<SettingStatus>("console");
+    const [adminName, setAdminName] = useState<string | undefined>();
     useEffect(() => {
         setSettingStatus("console");
+        setAdminName(undefined);
     }, [hiddenModal]);
     switch (settingStatus) {
         case "console":
@@ -33,9 +37,9 @@ export default ({hiddenModal, adminRole}: AdminSettingProp) => {
         case "adminChangeDenied":
             return <AdminSettingAdminChangeDeniedContent/>
         case "addAdmin":
-            return <AdminSettingAddAdminContent setSettingStatus={setSettingStatus}/>
+            return <AdminSettingAddAdminContent setSettingStatus={setSettingStatus} setAdminName={setAdminName}/>
         case "addAdminDone":
-            return <></>
+            return <AdminSettingAddAdminDoneContent setSettingStatus={setSettingStatus} adminName={adminName}/>
         case "removeAdmin":
             return <></>
         case "removeAdminDone":
