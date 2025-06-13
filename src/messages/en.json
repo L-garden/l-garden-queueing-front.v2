@@ -35,6 +35,7 @@
           "pwCheckPlaceholder": "pw check",
           "changePw": "Change PW",
           "pwNotMatchAlert": "PW not matches",
+          "plzInsertPw": "Please Insert your password",
           "done": "Password\nChange Complete"
         },
         "changeAdmin": {

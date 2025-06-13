@@ -20,6 +20,10 @@ export default ({setSettingStatus}: SetSettingStatusProp) => {
             alert(t('pwNotMatchAlert'));
             return;
         }
+        if(((pw.current?.value.length || 0) * (pwCheck.current?.value.length || 0)) === 0) {
+            alert(t('plzInsertPw'));
+            return;
+        }
         setSettingStatus("changePwDone");
     }
     return (

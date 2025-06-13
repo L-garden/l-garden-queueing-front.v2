@@ -35,6 +35,7 @@
           "pwCheckPlaceholder": "비밀번호 확인",
           "changePw": "비밀번호 변경",
           "pwNotMatchAlert": "비밀번호가 서로 일치하지 않습니다.",
+          "plzInsertPw": "비밀번호를 입력해주세요.",
           "done": "비밀번호가\n변경되었습니다"
         },
         "changeAdmin": {
