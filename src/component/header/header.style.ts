@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HeaderSection = styled.div`
+export const HeaderSection = styled.header`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -13,4 +13,10 @@ export const HeaderSection = styled.div`
         font-style: normal;
     }
     font-family: "Cafe24Ohsquare";
+    
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    backdrop-filter: blur(10px);
 `
