@@ -21,4 +21,12 @@ export interface SetSettingStatusProp {
     adminRole?: AdminRole;
     adminName?: string | undefined;
     setAdminName?: Dispatch<SetStateAction<string | undefined>>;
+    setModalWidth?: Dispatch<SetStateAction<string | undefined>>
+    setModalHeight?: Dispatch<SetStateAction<string | undefined>>
+}
+
+export interface AdminInfo {
+    adminId: number;
+    adminName: string;
+    adminRole: AdminRole;
 }

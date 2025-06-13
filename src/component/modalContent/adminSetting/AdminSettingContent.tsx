@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {Dispatch, SetStateAction, useEffect, useState} from "react";
 import {AdminRole, SettingStatus} from "@/component/modalContent/adminSetting/AdminSetting.type";
 import AdminSettingConsoleContent from "@/component/modalContent/adminSetting/console/AdminSettingConsoleContent";
 import {notFound} from "next/navigation";
@@ -12,18 +12,24 @@ import AdminSettingAdminChangeDeniedContent
 import AdminSettingAddAdminContent from "@/component/modalContent/adminSetting/addAdmin/AdminSettingAddAdminContent";
 import AdminSettingAddAdminDoneContent
     from "@/component/modalContent/adminSetting/addAdmin/AdminSettingAddAdminDoneContent";
+import AdminSettingRemoveAdminContent
+    from "@/component/modalContent/adminSetting/removeAdmin/AdminSettingRemoveAdminContent";
 
 interface AdminSettingProp {
     hiddenModal: boolean;
     adminRole: AdminRole;
+    setModalWidth: Dispatch<SetStateAction<string | undefined>>
+    setModalHeight: Dispatch<SetStateAction<string | undefined>>
 }
 
-export default ({hiddenModal, adminRole}: AdminSettingProp) => {
+export default ({hiddenModal, adminRole, setModalWidth, setModalHeight}: AdminSettingProp) => {
     const [settingStatus, setSettingStatus] = useState<SettingStatus>("console");
     const [adminName, setAdminName] = useState<string | undefined>();
     useEffect(() => {
         setSettingStatus("console");
         setAdminName(undefined);
+        setModalWidth(undefined);
+        setModalHeight(undefined);
     }, [hiddenModal]);
     switch (settingStatus) {
         case "console":
@@ -41,7 +47,12 @@ export default ({hiddenModal, adminRole}: AdminSettingProp) => {
         case "addAdminDone":
             return <AdminSettingAddAdminDoneContent setSettingStatus={setSettingStatus} adminName={adminName}/>
         case "removeAdmin":
-            return <></>
+            return <AdminSettingRemoveAdminContent
+                setSettingStatus={setSettingStatus}
+                setAdminName={setAdminName}
+                setModalWidth={setModalWidth}
+                setModalHeight={setModalHeight}
+            />
         case "removeAdminDone":
             return <></>
         case "removeCeoDenied":
