@@ -30,6 +30,11 @@
         "id": "아이디",
         "pw": "비밀번호"
       }
+    },
+    "registerBell": {
+      "bell": "진동벨",
+      "number": "번호",
+      "register": "등록"
     }
   }
 }

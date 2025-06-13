@@ -17,8 +17,8 @@ export default (
         children,
         hidden = true,
         onClickOutSide,
-        width = "300px",
-        height = "300px",
+        width = "330px",
+        height = "270px",
         z_index = 10
     }: ModalProp) => {
     const [mounted, setMounted] = useState(false);

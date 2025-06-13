@@ -30,6 +30,11 @@
         "id": "ID",
         "pw": "P/W"
       }
+    },
+    "registerBell": {
+      "bell": "Bell",
+      "number": "#",
+      "register": "Register"
     }
   }
 }

@@ -13,8 +13,6 @@ interface AdminButtonProp {
 
 export default ({isAdmin}: AdminButtonProp) => {
     const [hiddenModal, setHiddenModal] = useState<boolean>(true);
-    const [width, setWidth] = useState<string | undefined>();
-    const [height, setHeight] = useState<string | undefined>();
     const onClick = () => {
         setHiddenModal(false);
     }
@@ -28,14 +26,12 @@ export default ({isAdmin}: AdminButtonProp) => {
             <CustomModal
                 hidden={hiddenModal}
                 onClickOutSide={onClickOutSide}
-                width={width}
-                height={height}
             >
                 {
                     isAdmin ?
-                        <AdminSettingContent setWidth={setWidth} setHeight={setHeight}/>
+                        <AdminSettingContent/>
                         :
-                        <LoginFormContent setWidth={setWidth} setHeight={setHeight}/>
+                        <LoginFormContent/>
                 }
             </CustomModal>
         </AdminButton>
