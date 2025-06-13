@@ -22,7 +22,8 @@
     "admin": {
       "setting": {
         "changePassword": "Change P/W",
-        "adminChange": "Admin Change"
+        "adminChange": "Admin Change",
+        "logout": "Logout"
       }
     },
     "customer": {

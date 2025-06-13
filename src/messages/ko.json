@@ -22,7 +22,8 @@
     "admin": {
       "setting": {
         "changePassword": "비밀번호 변경",
-        "adminChange": "직원 추가/제거"
+        "adminChange": "직원 추가/제거",
+        "logout": "로그아웃"
       }
     },
     "customer": {
