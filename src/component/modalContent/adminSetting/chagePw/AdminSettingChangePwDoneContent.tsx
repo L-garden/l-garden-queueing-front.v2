@@ -2,10 +2,10 @@ import {ModalAnnounceDiv, ModalSection} from "@/component/modalContent/styles/mo
 import {useTranslations} from "next-intl";
 
 export default () => {
-    const t = useTranslations("modal.admin.setting.changeAdmin");
+    const t = useTranslations("modal.admin.setting.changePw");
     return (
         <ModalSection>
-            <ModalAnnounceDiv>{t('denied')}</ModalAnnounceDiv>
+            <ModalAnnounceDiv>{t('done')}</ModalAnnounceDiv>
         </ModalSection>
     )
 }
