@@ -3,14 +3,14 @@ import {TopAlertSection} from "@/component/queueBody/topAlert/topAlert.style";
 
 interface TopAlertProp {
     isAdmin?: boolean;
-    bellNo?: number;
     orderDone?: boolean;
+    myOrderNo?: number
 }
 
-export default ({isAdmin, bellNo, orderDone}: TopAlertProp) => {
+export default ({isAdmin, orderDone, myOrderNo}: TopAlertProp) => {
     return (
         <TopAlertSection>
-            <TopAlertButton isAdmin={isAdmin} bellNo={bellNo} orderDone={orderDone}/>
+            <TopAlertButton isAdmin={isAdmin} orderDone={orderDone} myOrderNo={myOrderNo}/>
         </TopAlertSection>
     )
 }

@@ -2,7 +2,7 @@
 import TopAlert from "@/component/queueBody/topAlert/TopAlert";
 import Queue from "@/component/queueBody/bellQueue/BellQueue";
 import {QueueBodySection} from "@/component/queueBody/queueBody.style";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {BellData} from "@/component/queueBody/types/Bell";
 
 interface QueueBodyProp {
@@ -32,7 +32,7 @@ const initBellList: BellData[] = [
     },
 ];
 
-const initMyBell = 2;
+const initMyBell = 7;
 const initOrderDone = false;
 
 export default ({isAdmin}: QueueBodyProp) => {
@@ -40,11 +40,19 @@ export default ({isAdmin}: QueueBodyProp) => {
     const [bellList, setBellList] = useState<BellData[]>(initBellList);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [myBellNo, setMyBellNo] = useState<number>(initMyBell);
+    const [myOrderNo, setMyOrderNo] = useState<number | undefined>();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [orderDone, setOrderDone] = useState<boolean>(initOrderDone);
+    useEffect(() => {
+        bellList.forEach((bellData, index) => {
+            if (bellData.bellNo === myBellNo) {
+                setMyOrderNo(index + 1);
+            }
+        })
+    }, [bellList]);
     return (
         <QueueBodySection>
-            <TopAlert isAdmin={isAdmin} bellNo={myBellNo} orderDone={orderDone}/>
+            <TopAlert isAdmin={isAdmin} orderDone={orderDone} myOrderNo={myOrderNo}/>
             <Queue isAdmin={isAdmin} bellList={bellList} myBellNo={myBellNo}/>
         </QueueBodySection>
     );

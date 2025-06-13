@@ -6,11 +6,11 @@ import RegisterBellContent from "@/component/modalContent/registerBell/RegisterB
 
 interface TopAlertButtonProp {
     isAdmin?: boolean;
-    bellNo?: number;
     orderDone?: boolean;
+    myOrderNo?: number;
 }
 
-export default ({isAdmin, bellNo, orderDone}: TopAlertButtonProp) => {
+export default ({isAdmin, orderDone, myOrderNo}: TopAlertButtonProp) => {
     const [hiddenModal, setHiddenModal] = useState<boolean>(true);
     const onClick = () => {
         setHiddenModal(false);
@@ -39,10 +39,10 @@ export default ({isAdmin, bellNo, orderDone}: TopAlertButtonProp) => {
         )
     }
     const t = useTranslations("topAlert.customer");
-    if (bellNo) {
+    if (myOrderNo) {
         return (
             <TopAlertButton>
-                {t(`queueing`, {bellNo: bellNo})}
+                {t(`queueing`, {bellNo: myOrderNo})}
             </TopAlertButton>
         )
     }
