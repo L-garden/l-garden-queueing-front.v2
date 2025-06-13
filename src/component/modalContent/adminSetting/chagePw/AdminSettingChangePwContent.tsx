@@ -1,7 +1,7 @@
 import {useTranslations} from "next-intl";
 import {ModalSection} from "@/component/modalContent/styles/modalNormal.style";
-import {Dispatch, FormEvent, SetStateAction, useRef} from "react";
-import {SettingStatus} from "@/component/modalContent/adminSetting/AdminSetting.type";
+import {FormEvent, useRef} from "react";
+import {SetSettingStatusProp} from "@/component/modalContent/adminSetting/AdminSetting.type";
 import {
     ModalForm,
     ModalFormButton,
@@ -10,11 +10,7 @@ import {
     ModalFormInputTitle
 } from "@/component/modalContent/styles/modalForm.style";
 
-interface AdminSettingChangePwProp {
-    setSettingStatus: Dispatch<SetStateAction<SettingStatus>>;
-}
-
-export default ({setSettingStatus}: AdminSettingChangePwProp) => {
+export default ({setSettingStatus}: SetSettingStatusProp) => {
     const t = useTranslations("modal.admin.setting.changePw");
     const pw = useRef<HTMLInputElement>(null);
     const pwCheck = useRef<HTMLInputElement>(null);

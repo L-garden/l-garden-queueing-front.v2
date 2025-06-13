@@ -1,14 +1,9 @@
 import {useTranslations} from "next-intl";
 import {ModalButton, ModalSection} from "@/component/modalContent/styles/modalNormal.style";
 import {Link} from "@/i18n/navigation";
-import {Dispatch, SetStateAction} from "react";
-import {SettingStatus} from "@/component/modalContent/adminSetting/AdminSetting.type";
+import {SetSettingStatusProp} from "@/component/modalContent/adminSetting/AdminSetting.type";
 
-interface AdminSettingConsoleProp {
-    setSettingStatus: Dispatch<SetStateAction<SettingStatus>>;
-}
-
-export default ({setSettingStatus}: AdminSettingConsoleProp) => {
+export default ({setSettingStatus}: SetSettingStatusProp) => {
     const t = useTranslations("modal.admin.setting.console");
     const changePw = () => {
         setSettingStatus("changePw");

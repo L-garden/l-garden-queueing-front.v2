@@ -1,6 +1,6 @@
 {
   "name": "l-garden-queueing-front.v2",
-  "version": "0.7.2",
+  "version": "0.8.1",
   "private": true,
   "scripts": {
     "dev": "env-cmd -f env/.env.dev next dev --turbopack",

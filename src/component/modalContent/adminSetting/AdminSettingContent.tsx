@@ -5,6 +5,8 @@ import {notFound} from "next/navigation";
 import AdminSettingChangePwContent from "@/component/modalContent/adminSetting/chagePw/AdminSettingChangePwContent";
 import AdminSettingChangePwDoneContent
     from "@/component/modalContent/adminSetting/chagePw/AdminSettingChangePwDoneContent";
+import AdminSettingAdminChangeContent
+    from "@/component/modalContent/adminSetting/adminChange/AdminSettingAdminChangeContent";
 
 interface AdminSettingProp {
     hiddenModal: boolean;
@@ -23,7 +25,7 @@ export default ({hiddenModal}: AdminSettingProp) => {
         case "changePwDone":
             return <AdminSettingChangePwDoneContent/>
         case "adminChange":
-            return <></>
+            return <AdminSettingAdminChangeContent setSettingStatus={setSettingStatus}/>
         case "adminChangeDenied":
             return <></>
         case "addAdmin":

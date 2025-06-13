@@ -36,6 +36,10 @@
           "changePw": "비밀번호 변경",
           "pwNotMatchAlert": "비밀번호가 서로 일치하지 않습니다.",
           "done": "비밀번호가\n변경되었습니다"
+        },
+        "changeAdmin": {
+          "addAdmin": "직원 추가",
+          "removeAdmin": "직원 제거"
         }
       }
     },

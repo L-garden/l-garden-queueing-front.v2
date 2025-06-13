@@ -36,6 +36,10 @@
           "changePw": "Change PW",
           "pwNotMatchAlert": "PW not matches",
           "done": "Password\nChange Complete"
+        },
+        "changeAdmin": {
+          "addAdmin": "Add Admin",
+          "removeAdmin": "Remove Admin"
         }
       }
     },

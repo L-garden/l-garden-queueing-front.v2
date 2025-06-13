@@ -1,3 +1,5 @@
+import {Dispatch, SetStateAction} from "react";
+
 export type SettingStatus =
     "console" |
     "changePw" |
@@ -11,3 +13,7 @@ export type SettingStatus =
     "removeCeoDenied" |
     ""
     ;
+
+export interface SetSettingStatusProp {
+    setSettingStatus: Dispatch<SetStateAction<SettingStatus>>;
+}
