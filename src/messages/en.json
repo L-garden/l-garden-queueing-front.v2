@@ -39,7 +39,8 @@
         },
         "changeAdmin": {
           "addAdmin": "Add Admin",
-          "removeAdmin": "Remove Admin"
+          "removeAdmin": "Remove Admin",
+          "denied": "Unauthorized\nRequest"
         }
       }
     },

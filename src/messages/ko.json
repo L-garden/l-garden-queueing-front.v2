@@ -39,7 +39,8 @@
         },
         "changeAdmin": {
           "addAdmin": "직원 추가",
-          "removeAdmin": "직원 제거"
+          "removeAdmin": "직원 제거",
+          "denied": "직원 추가/제거는\n사장님만 가능합니다"
         }
       }
     },

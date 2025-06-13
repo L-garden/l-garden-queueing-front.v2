@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {SettingStatus} from "@/component/modalContent/adminSetting/AdminSetting.type";
+import {AdminRole, SettingStatus} from "@/component/modalContent/adminSetting/AdminSetting.type";
 import AdminSettingConsoleContent from "@/component/modalContent/adminSetting/console/AdminSettingConsoleContent";
 import {notFound} from "next/navigation";
 import AdminSettingChangePwContent from "@/component/modalContent/adminSetting/chagePw/AdminSettingChangePwContent";
@@ -7,12 +7,15 @@ import AdminSettingChangePwDoneContent
     from "@/component/modalContent/adminSetting/chagePw/AdminSettingChangePwDoneContent";
 import AdminSettingAdminChangeContent
     from "@/component/modalContent/adminSetting/adminChange/AdminSettingAdminChangeContent";
+import AdminSettingAdminChangeDeniedContent
+    from "@/component/modalContent/adminSetting/adminChange/AdminSettingAdminChangeDeniedContent";
 
 interface AdminSettingProp {
     hiddenModal: boolean;
+    adminRole: AdminRole;
 }
 
-export default ({hiddenModal}: AdminSettingProp) => {
+export default ({hiddenModal, adminRole}: AdminSettingProp) => {
     const [settingStatus, setSettingStatus] = useState<SettingStatus>("console");
     useEffect(() => {
         setSettingStatus("console");
@@ -25,9 +28,9 @@ export default ({hiddenModal}: AdminSettingProp) => {
         case "changePwDone":
             return <AdminSettingChangePwDoneContent/>
         case "adminChange":
-            return <AdminSettingAdminChangeContent setSettingStatus={setSettingStatus}/>
+            return <AdminSettingAdminChangeContent setSettingStatus={setSettingStatus} adminRole={adminRole}/>
         case "adminChangeDenied":
-            return <></>
+            return <AdminSettingAdminChangeDeniedContent/>
         case "addAdmin":
             return <></>
         case "addAdminDone":

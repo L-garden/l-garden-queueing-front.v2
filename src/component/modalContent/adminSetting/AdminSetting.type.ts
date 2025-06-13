@@ -14,6 +14,9 @@ export type SettingStatus =
     ""
     ;
 
+export type AdminRole = "CEO" | "ADMIN" | "DEVELOPER";
+
 export interface SetSettingStatusProp {
     setSettingStatus: Dispatch<SetStateAction<SettingStatus>>;
+    adminRole?: AdminRole;
 }

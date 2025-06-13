@@ -1,5 +1,5 @@
-import {ModalAnnounceDiv, ModalSection} from "@/component/modalContent/styles/modalNormal.style";
 import {useTranslations} from "next-intl";
+import {ModalAnnounceDiv, ModalSection} from "@/component/modalContent/styles/modalNormal.style";
 
 export default () => {
     const t = useTranslations("modal.admin.setting.changeAdmin");
