@@ -39,17 +39,17 @@ export default ({isAdmin, orderDone, myOrderNo}: TopAlertButtonProp) => {
         )
     }
     const t = useTranslations("topAlert.customer");
-    if (myOrderNo) {
-        return (
-            <TopAlertButton>
-                {t(`queueing`, {bellNo: myOrderNo})}
-            </TopAlertButton>
-        )
-    }
     if (orderDone) {
         return (
             <TopAlertButton>
                 {t(`orderDone`)}
+            </TopAlertButton>
+        )
+    }
+    if (myOrderNo) {
+        return (
+            <TopAlertButton>
+                {t(`queueing`, {bellNo: myOrderNo})}
             </TopAlertButton>
         )
     }

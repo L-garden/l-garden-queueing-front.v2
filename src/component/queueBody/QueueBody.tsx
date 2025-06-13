@@ -32,7 +32,7 @@ const initBellList: BellData[] = [
     },
 ];
 
-const initMyBell = 7;
+const initMyBell = 3;
 const initOrderDone = false;
 
 export default ({isAdmin}: QueueBodyProp) => {
@@ -41,12 +41,14 @@ export default ({isAdmin}: QueueBodyProp) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [myBellNo, setMyBellNo] = useState<number>(initMyBell);
     const [myOrderNo, setMyOrderNo] = useState<number | undefined>();
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [orderDone, setOrderDone] = useState<boolean>(initOrderDone);
     useEffect(() => {
         bellList.forEach((bellData, index) => {
             if (bellData.bellNo === myBellNo) {
                 setMyOrderNo(index + 1);
+                if (bellData.isDone) {
+                    setOrderDone(true);
+                }
             }
         })
     }, [bellList]);
