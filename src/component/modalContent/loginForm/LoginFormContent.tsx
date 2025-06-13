@@ -7,11 +7,14 @@ import {
     LoginInputTitle
 } from "@/component/modalContent/loginForm/loginForm.style";
 import {useTranslations} from "next-intl";
+import {useRouter} from "@/i18n/navigation";
 
 export default () => {
     const t = useTranslations("modal.customer.loginForm");
+    const router = useRouter();
     const onSubmit = (e: FormEvent) => {
         e.preventDefault();
+        router.push("/admin");
     }
     return (
         <LoginForm onSubmit={onSubmit}>
@@ -23,7 +26,7 @@ export default () => {
                 <LoginInputTitle>{t('pw')}</LoginInputTitle>
                 <LoginInput placeholder="pw" type="password"/>
             </LoginInputContainer>
-            <LoginButton type="submit">로그인</LoginButton>
+            <LoginButton type="submit">{t('signIn')}</LoginButton>
         </LoginForm>
     )
 }

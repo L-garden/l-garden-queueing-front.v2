@@ -28,7 +28,8 @@
     "customer": {
       "loginForm": {
         "id": "ID",
-        "pw": "P/W"
+        "pw": "P/W",
+        "signIn": "sign in"
       }
     },
     "registerBell": {
