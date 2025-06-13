@@ -32,14 +32,12 @@ const initBellList: BellData[] = [
     },
 ];
 
-const initMyBell = 3;
 const initOrderDone = false;
 
 export default ({isAdmin}: QueueBodyProp) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [bellList, setBellList] = useState<BellData[]>(initBellList);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [myBellNo, setMyBellNo] = useState<number>(initMyBell);
+    const [myBellNo, setMyBellNo] = useState<number | undefined>();
     const [myOrderNo, setMyOrderNo] = useState<number | undefined>();
     const [orderDone, setOrderDone] = useState<boolean>(initOrderDone);
     useEffect(() => {
@@ -51,10 +49,10 @@ export default ({isAdmin}: QueueBodyProp) => {
                 }
             }
         })
-    }, [bellList]);
+    }, [bellList, myBellNo]);
     return (
         <QueueBodySection>
-            <TopAlert isAdmin={isAdmin} orderDone={orderDone} myOrderNo={myOrderNo}/>
+            <TopAlert isAdmin={isAdmin} orderDone={orderDone} myOrderNo={myOrderNo} setMyBellNo={setMyBellNo}/>
             <Queue isAdmin={isAdmin} bellList={bellList} myBellNo={myBellNo}/>
         </QueueBodySection>
     );

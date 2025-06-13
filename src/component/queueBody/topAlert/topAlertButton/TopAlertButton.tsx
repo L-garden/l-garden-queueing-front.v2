@@ -1,6 +1,6 @@
 import {useTranslations} from "next-intl";
 import {TopAlertButton} from "@/component/queueBody/topAlert/topAlertButton/topAlertButton.style";
-import {MouseEvent, useState} from "react";
+import {Dispatch, MouseEvent, SetStateAction, useState} from "react";
 import CustomModal from "@/component/common/CustomModal";
 import RegisterBellContent from "@/component/modalContent/registerBell/RegisterBellContent";
 
@@ -8,9 +8,10 @@ interface TopAlertButtonProp {
     isAdmin?: boolean;
     orderDone?: boolean;
     myOrderNo?: number;
+    setMyBellNo: Dispatch<SetStateAction<number | undefined>>;
 }
 
-export default ({isAdmin, orderDone, myOrderNo}: TopAlertButtonProp) => {
+export default ({isAdmin, orderDone, myOrderNo, setMyBellNo}: TopAlertButtonProp) => {
     const [hiddenModal, setHiddenModal] = useState<boolean>(true);
     const onClick = () => {
         setHiddenModal(false);
@@ -19,9 +20,12 @@ export default ({isAdmin, orderDone, myOrderNo}: TopAlertButtonProp) => {
         e.stopPropagation();
         setHiddenModal(true);
     }
-    const registerBellByAdmin = () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const registerBellByAdmin = (bellNo: number) => {
     }
-    const registerBellByCustomer = () => {
+    const registerBellByCustomer = (bellNo: number) => {
+        setMyBellNo(bellNo);
+        setHiddenModal(true);
     }
 
     if (isAdmin) {
@@ -54,7 +58,7 @@ export default ({isAdmin, orderDone, myOrderNo}: TopAlertButtonProp) => {
         )
     }
     return (
-        <TopAlertButton>
+        <TopAlertButton onClick={onClick}>
             {t(`enqueue`)}
             <CustomModal
                 hidden={hiddenModal}
