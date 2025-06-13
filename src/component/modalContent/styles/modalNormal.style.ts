@@ -22,3 +22,9 @@ export const ModalButton = styled.button`
         background-color: #BABABAFF;
     }
 `;
+
+export const ModalAnnounceDiv = styled.div`
+    font-size: 30px;
+    white-space: pre-line;
+    text-align: center;
+`;

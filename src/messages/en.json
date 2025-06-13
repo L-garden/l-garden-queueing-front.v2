@@ -34,7 +34,8 @@
           "pwCheck": "PW check",
           "pwCheckPlaceholder": "pw check",
           "changePw": "Change PW",
-          "pwNotMatchAlert": "PW not matches"
+          "pwNotMatchAlert": "PW not matches",
+          "done": "Password\nChange Complete"
         }
       }
     },

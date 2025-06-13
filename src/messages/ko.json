@@ -34,7 +34,8 @@
           "pwCheck": "비밀번호 확인",
           "pwCheckPlaceholder": "비밀번호 확인",
           "changePw": "비밀번호 변경",
-          "pwNotMatchAlert": "비밀번호가 서로 일치하지 않습니다."
+          "pwNotMatchAlert": "비밀번호가 서로 일치하지 않습니다.",
+          "done": "비밀번호가\n변경되었습니다"
         }
       }
     },
