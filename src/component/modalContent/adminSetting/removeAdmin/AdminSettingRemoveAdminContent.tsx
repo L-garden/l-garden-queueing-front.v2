@@ -1,5 +1,5 @@
 import {AdminInfo, SetSettingStatusProp} from "@/component/modalContent/adminSetting/AdminSetting.type";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {
     ModalDataButton,
     ModalDataContainer,
@@ -62,8 +62,9 @@ export default ({setSettingStatus, setAdminName, setModalWidth, setModalHeight}:
             setModalWidth?.(undefined);
             setModalHeight?.(undefined);
         }
-    }, []);
-    const onClick = (adminInfo: AdminInfo) => {
+    }, [setModalWidth, setModalHeight]);
+
+    const onClick = useCallback((adminInfo: AdminInfo) => {
         if (adminInfo.adminRole === "CEO") {
             setAdminName?.(adminInfo.adminName);
             setSettingStatus("removeCeoDenied");
@@ -71,7 +72,7 @@ export default ({setSettingStatus, setAdminName, setModalWidth, setModalHeight}:
         }
         setAdminName?.(adminInfo.adminName);
         setSettingStatus("removeAdminDone");
-    }
+    }, [setAdminName, setSettingStatus]);
     return (
         <ModalSection>
             {

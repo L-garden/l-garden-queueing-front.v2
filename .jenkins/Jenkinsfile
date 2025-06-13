@@ -18,7 +18,7 @@ pipeline {
                 sortMode: 'DESCENDING_SMART',
                 tagFilter: '*',
                 type: 'PT_BRANCH_TAG'
-        booleanParam(defaultValue: true, description: '', name: 'COPY_DOCKER_COMPOSE')
+        booleanParam(defaultValue: false, description: '', name: 'COPY_DOCKER_COMPOSE')
         booleanParam(defaultValue: true, description: '', name: 'IS_SSR')
         string(defaultValue: 'onprem', description: '', name: 'APP_PROFILE')
     }
@@ -37,7 +37,7 @@ pipeline {
 
     options {
         disableConcurrentBuilds()
-        buildDiscarder(logRotator(numToKeepStr: "30", artifactNumToKeepStr: "30"))
+        buildDiscarder(logRotator(numToKeepStr: "10", artifactNumToKeepStr: "10"))
         timeout(time: 120, unit: 'MINUTES')
     }
 

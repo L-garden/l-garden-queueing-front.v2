@@ -30,7 +30,7 @@ export const useSocketClient = (
         return () => {
             client.deactivate();
         };
-    }, [clientRef, subEndpoint]);
+    }, [clientRef, subEndpoint, stompEndpoint, subCallback]);
     return clientRef;
 }
 

@@ -34,7 +34,7 @@ export default ({hiddenModal, adminRole, setModalWidth, setModalHeight}: AdminSe
         setAdminName(undefined);
         setModalWidth(undefined);
         setModalHeight(undefined);
-    }, [hiddenModal]);
+    }, [hiddenModal, setModalWidth, setModalHeight]);
     switch (settingStatus) {
         case "console":
             return <AdminSettingConsoleContent setSettingStatus={setSettingStatus}/>

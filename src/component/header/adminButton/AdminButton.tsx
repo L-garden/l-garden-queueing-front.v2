@@ -3,7 +3,7 @@
 import {MdSettings} from "react-icons/md";
 import {AdminButton} from "@/component/header/adminButton/adminButton.style";
 import CustomModal from "@/component/common/CustomModal";
-import {MouseEvent, use, useState} from "react";
+import {MouseEvent, useState} from "react";
 import LoginFormContent from "@/component/modalContent/loginForm/LoginFormContent";
 import AdminSettingContent from "@/component/modalContent/adminSetting/AdminSettingContent";
 
