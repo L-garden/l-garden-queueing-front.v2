@@ -4,7 +4,7 @@ import QueueBody from "@/component/queueBody/QueueBody";
 export default () => {
     return (
         <>
-            <Header userName={"주방장"}/>
+            <Header userName={"주방장"} isAdmin={true}/>
             <QueueBody isAdmin={true}/>
         </>
     )

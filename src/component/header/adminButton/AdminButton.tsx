@@ -1,10 +1,43 @@
+'use client'
+
 import {MdSettings} from "react-icons/md";
 import {AdminButton} from "@/component/header/adminButton/adminButton.style";
+import CustomModal from "@/component/common/CustomModal";
+import {MouseEvent, useState} from "react";
+import LoginFormContent from "@/component/modalContent/loginForm/LoginFormContent";
+import AdminSettingContent from "@/component/modalContent/adminSetting/AdminSettingContent";
 
-export default () => {
+interface AdminButtonProp {
+    isAdmin?: boolean;
+}
+
+export default ({isAdmin}: AdminButtonProp) => {
+    const [hiddenModal, setHiddenModal] = useState<boolean>(true);
+    const [width, setWidth] = useState<string | undefined>();
+    const [height, setHeight] = useState<string | undefined>();
+    const onClick = () => {
+        setHiddenModal(false);
+    }
+    const onClickOutSide = (e: MouseEvent) => {
+        e.stopPropagation();
+        setHiddenModal(true);
+    }
     return (
-        <AdminButton>
+        <AdminButton onClick={onClick}>
             <MdSettings size="30px"/>
+            <CustomModal
+                hidden={hiddenModal}
+                onClickOutSide={onClickOutSide}
+                width={width}
+                height={height}
+            >
+                {
+                    isAdmin ?
+                        <AdminSettingContent setWidth={setWidth} setHeight={setHeight}/>
+                        :
+                        <LoginFormContent setWidth={setWidth} setHeight={setHeight}/>
+                }
+            </CustomModal>
         </AdminButton>
     )
 }

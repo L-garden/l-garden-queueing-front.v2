@@ -17,5 +17,19 @@
     "bell": "Bell",
     "delButton": "DELETE",
     "callButton": "CALL"
+  },
+  "modal": {
+    "admin": {
+      "setting": {
+        "changePassword": "Change P/W",
+        "adminChange": "Admin Change"
+      }
+    },
+    "customer": {
+      "loginForm": {
+        "id": "ID",
+        "pw": "P/W"
+      }
+    }
   }
 }

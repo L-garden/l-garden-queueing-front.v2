@@ -17,5 +17,19 @@
     "bell": "진동벨",
     "delButton": "제거",
     "callButton": "호출"
+  },
+  "modal": {
+    "admin": {
+      "setting": {
+        "changePassword": "비밀번호 변경",
+        "adminChange": "직원 추가/제거"
+      }
+    },
+    "customer": {
+      "loginForm": {
+        "id": "아이디",
+        "pw": "비밀번호"
+      }
+    }
   }
 }
