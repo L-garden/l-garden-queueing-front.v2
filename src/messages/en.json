@@ -53,7 +53,10 @@
           "back": "back"
         },
         "removeAdmin": {
-          "removeButton": "remove"
+          "removeButton": "remove",
+          "done": "{name} is\n removed",
+          "denied": "{name} is NOT\nREMOVABLE",
+          "back": "back"
         }
       }
     },

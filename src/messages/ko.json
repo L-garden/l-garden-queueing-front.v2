@@ -53,7 +53,10 @@
           "back": "뒤로 가기"
         },
         "removeAdmin": {
-          "removeButton": "제거"
+          "removeButton": "제거",
+          "done": "{name}을\n제거했습니다",
+          "denied": "{name}은 제거가\n불가능합니다",
+          "back": "뒤로 가기"
         }
       }
     },

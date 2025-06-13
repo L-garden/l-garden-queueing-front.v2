@@ -14,6 +14,10 @@ import AdminSettingAddAdminDoneContent
     from "@/component/modalContent/adminSetting/addAdmin/AdminSettingAddAdminDoneContent";
 import AdminSettingRemoveAdminContent
     from "@/component/modalContent/adminSetting/removeAdmin/AdminSettingRemoveAdminContent";
+import AdminSettingRemoveAdminDoneContent
+    from "@/component/modalContent/adminSetting/removeAdmin/AdminSettingRemoveAdminDoneContent";
+import AdminSettingRemoveCeoDeniedContent
+    from "@/component/modalContent/adminSetting/removeAdmin/AdminSettingRemoveCeoDeniedContent";
 
 interface AdminSettingProp {
     hiddenModal: boolean;
@@ -54,9 +58,9 @@ export default ({hiddenModal, adminRole, setModalWidth, setModalHeight}: AdminSe
                 setModalHeight={setModalHeight}
             />
         case "removeAdminDone":
-            return <></>
+            return <AdminSettingRemoveAdminDoneContent setSettingStatus={setSettingStatus} adminName={adminName}/>
         case "removeCeoDenied":
-            return <></>
+            return <AdminSettingRemoveCeoDeniedContent setSettingStatus={setSettingStatus} adminName={adminName}/>
         default:
             notFound();
     }
