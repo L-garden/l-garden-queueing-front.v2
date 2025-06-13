@@ -6,11 +6,16 @@
   "topAlert": {
     "customer": {
       "enqueue": "나의 진동벨을 등록해보세요.",
-      "queueing": "현재 나의 순서 {queueNo}번째",
+      "queueing": "현재 나의 순서 {bellNo}번째",
       "orderDone": "주문이 완료됐어요!"
     },
     "admin": {
       "registerBell": "진동벨 추가"
     }
+  },
+  "bellQueue": {
+    "bell": "진동벨",
+    "delButton": "제거",
+    "callButton": "호출"
   }
 }

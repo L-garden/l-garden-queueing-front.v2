@@ -2,13 +2,15 @@ import TopAlertButton from "@/component/queueBody/topAlert/topAlertButton/TopAle
 import {TopAlertSection} from "@/component/queueBody/topAlert/topAlert.style";
 
 interface TopAlertProp {
-    isAdmin?: boolean
+    isAdmin?: boolean;
+    bellNo?: number;
+    orderDone?: boolean;
 }
 
-export default ({isAdmin}: TopAlertProp) => {
+export default ({isAdmin, bellNo, orderDone}: TopAlertProp) => {
     return (
         <TopAlertSection>
-            <TopAlertButton isAdmin={isAdmin}/>
+            <TopAlertButton isAdmin={isAdmin} bellNo={bellNo} orderDone={orderDone}/>
         </TopAlertSection>
     )
 }

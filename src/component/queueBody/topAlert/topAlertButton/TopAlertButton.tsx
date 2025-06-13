@@ -3,11 +3,11 @@ import {TopAlertButton} from "@/component/queueBody/topAlert/topAlertButton/topA
 
 interface TopAlertButtonProp {
     isAdmin?: boolean;
-    queueNo?: number;
+    bellNo?: number;
     orderDone?: boolean;
 }
 
-export default ({isAdmin, queueNo, orderDone}: TopAlertButtonProp) => {
+export default ({isAdmin, bellNo, orderDone}: TopAlertButtonProp) => {
     if (isAdmin) {
         const t = useTranslations("topAlert.admin");
         return (
@@ -17,10 +17,10 @@ export default ({isAdmin, queueNo, orderDone}: TopAlertButtonProp) => {
         )
     }
     const t = useTranslations("topAlert.customer");
-    if (queueNo) {
+    if (bellNo) {
         return (
             <TopAlertButton>
-                {t(`queueing`, {queueNo})}
+                {t(`queueing`, {bellNo: bellNo})}
             </TopAlertButton>
         )
     }

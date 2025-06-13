@@ -6,11 +6,16 @@
   "topAlert": {
     "customer": {
       "enqueue": "Register your Bell#",
-      "queueing": "I'm {queueNo}th",
+      "queueing": "I'm {bellNo}th",
       "orderDone": "Order Done!"
     },
     "admin": {
       "registerBell": "Register Bell"
     }
+  },
+  "bellQueue": {
+    "bell": "Bell",
+    "delButton": "DELETE",
+    "callButton": "CALL"
   }
 }
