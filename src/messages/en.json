@@ -2,5 +2,15 @@
   "locale": "en",
   "header": {
     "title": "L.garden"
+  },
+  "topAlert": {
+    "customer": {
+      "enqueue": "Register your Bell#",
+      "queueing": "I'm {queueNo}th",
+      "orderDone": "Order Done!"
+    },
+    "admin": {
+      "registerBell": "Register Bell"
+    }
   }
 }
