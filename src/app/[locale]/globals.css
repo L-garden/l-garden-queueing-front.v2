@@ -3,6 +3,7 @@
 :root {
     --background: #ffffff;
     --foreground: #171717;
+    height: 100dvh;
 }
 
 @theme inline {
@@ -27,4 +28,5 @@ body {
         font-style: normal;
     }
     font-family: "Cafe24Ohsquare", Arial, Helvetica, sans-serif;
+    height: 100%;
 }
