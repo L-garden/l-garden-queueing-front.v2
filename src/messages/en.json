@@ -41,6 +41,13 @@
           "addAdmin": "Add Admin",
           "removeAdmin": "Remove Admin",
           "denied": "Unauthorized\nRequest"
+        },
+        "addAdmin": {
+          "id": "id",
+          "idPlaceholder": "id",
+          "name": "name",
+          "namePlaceholder": "name",
+          "addAdmin": "Add Admin"
         }
       }
     },

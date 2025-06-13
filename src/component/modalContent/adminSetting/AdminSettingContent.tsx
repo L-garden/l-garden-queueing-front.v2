@@ -9,6 +9,7 @@ import AdminSettingAdminChangeContent
     from "@/component/modalContent/adminSetting/adminChange/AdminSettingAdminChangeContent";
 import AdminSettingAdminChangeDeniedContent
     from "@/component/modalContent/adminSetting/adminChange/AdminSettingAdminChangeDeniedContent";
+import AdminSettingAddAdminContent from "@/component/modalContent/adminSetting/addAdmin/AdminSettingAddAdminContent";
 
 interface AdminSettingProp {
     hiddenModal: boolean;
@@ -32,7 +33,7 @@ export default ({hiddenModal, adminRole}: AdminSettingProp) => {
         case "adminChangeDenied":
             return <AdminSettingAdminChangeDeniedContent/>
         case "addAdmin":
-            return <></>
+            return <AdminSettingAddAdminContent setSettingStatus={setSettingStatus}/>
         case "addAdminDone":
             return <></>
         case "removeAdmin":

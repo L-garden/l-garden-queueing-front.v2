@@ -41,6 +41,13 @@
           "addAdmin": "직원 추가",
           "removeAdmin": "직원 제거",
           "denied": "직원 추가/제거는\n사장님만 가능합니다"
+        },
+        "addAdmin": {
+          "id": "아이디",
+          "idPlaceholder": "아이디",
+          "name": "이름",
+          "namePlaceholder": "이름",
+          "addAdmin": "직원 추가"
         }
       }
     },
