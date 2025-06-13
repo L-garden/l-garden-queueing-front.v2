@@ -21,9 +21,21 @@
   "modal": {
     "admin": {
       "setting": {
-        "changePassword": "비밀번호 변경",
-        "adminChange": "직원 추가/제거",
-        "logout": "로그아웃"
+        "console": {
+          "changePassword": "비밀번호 변경",
+          "adminChange": "직원 추가/제거",
+          "logout": "로그아웃"
+        },
+        "changePw": {
+          "id": "아이디",
+          "idPlaceholder": "아이디",
+          "pw": "비밀번호",
+          "pwPlaceholder": "비밀번호",
+          "pwCheck": "비밀번호 확인",
+          "pwCheckPlaceholder": "비밀번호 확인",
+          "changePw": "비밀번호 변경",
+          "pwNotMatchAlert": "비밀번호가 서로 일치하지 않습니다."
+        }
       }
     },
     "customer": {

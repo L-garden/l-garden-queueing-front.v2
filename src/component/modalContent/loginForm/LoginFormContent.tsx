@@ -1,11 +1,11 @@
 import {FormEvent} from "react";
 import {
-    LoginButton,
-    LoginForm,
-    LoginInput,
-    LoginInputContainer,
-    LoginInputTitle
-} from "@/component/modalContent/loginForm/loginForm.style";
+    ModalForm,
+    ModalFormButton,
+    ModalFormInput,
+    ModalFormInputContainer,
+    ModalFormInputTitle
+} from "@/component/modalContent/styles/modalForm.style";
 import {useTranslations} from "next-intl";
 import {useRouter} from "@/i18n/navigation";
 
@@ -17,16 +17,16 @@ export default () => {
         router.push("/admin");
     }
     return (
-        <LoginForm onSubmit={onSubmit}>
-            <LoginInputContainer>
-                <LoginInputTitle>{t('id')}</LoginInputTitle>
-                <LoginInput placeholder="id" type="text"/>
-            </LoginInputContainer>
-            <LoginInputContainer>
-                <LoginInputTitle>{t('pw')}</LoginInputTitle>
-                <LoginInput placeholder="pw" type="password"/>
-            </LoginInputContainer>
-            <LoginButton type="submit">{t('signIn')}</LoginButton>
-        </LoginForm>
+        <ModalForm onSubmit={onSubmit}>
+            <ModalFormInputContainer>
+                <ModalFormInputTitle>{t('id')}</ModalFormInputTitle>
+                <ModalFormInput placeholder="id" type="text"/>
+            </ModalFormInputContainer>
+            <ModalFormInputContainer>
+                <ModalFormInputTitle>{t('pw')}</ModalFormInputTitle>
+                <ModalFormInput placeholder="pw" type="password"/>
+            </ModalFormInputContainer>
+            <ModalFormButton type="submit">{t('signIn')}</ModalFormButton>
+        </ModalForm>
     )
 }

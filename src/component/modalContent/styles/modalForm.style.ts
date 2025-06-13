@@ -2,7 +2,7 @@
 
 import styled from "styled-components";
 
-export const LoginForm = styled.form`
+export const ModalForm = styled.form`
     width: 100%;
     height: 100%;
 
@@ -12,12 +12,12 @@ export const LoginForm = styled.form`
     justify-content: space-evenly;
 `;
 
-export const LoginInputContainer = styled.section`
+export const ModalFormInputContainer = styled.section`
     display: flex;
     align-items: center;
 `;
 
-export const LoginInputTitle = styled.section`
+export const ModalFormInputTitle = styled.section`
     width: 130px;
     height: 60px;
     text-align: center;
@@ -25,7 +25,7 @@ export const LoginInputTitle = styled.section`
     align-content: center;
 `;
 
-export const LoginInput = styled.input`
+export const ModalFormInput = styled.input`
     width: 150px;
     height: 40px;
     text-align: start;
@@ -40,7 +40,7 @@ export const LoginInput = styled.input`
     padding-left: 10px;
 `;
 
-export const LoginButton = styled.button`
+export const ModalFormButton = styled.button`
     width: 250px;
     height: 55px;
     font-size: 20px;

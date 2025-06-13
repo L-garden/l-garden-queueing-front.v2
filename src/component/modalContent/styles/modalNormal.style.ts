@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const AdminSettingSection = styled.section`
+export const ModalSection = styled.section`
     width: 100%;
     height: 100%;
 
@@ -10,7 +10,7 @@ export const AdminSettingSection = styled.section`
     justify-content: space-evenly;
 `;
 
-export const AdminAuthButton = styled.button`
+export const ModalButton = styled.button`
     width: 250px;
     height: 55px;
     font-size: 20px;

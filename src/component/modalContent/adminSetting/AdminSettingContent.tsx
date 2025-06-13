@@ -1,16 +1,40 @@
-import {AdminAuthButton, AdminSettingSection} from "@/component/modalContent/adminSetting/adminSetting.style";
-import {useTranslations} from "next-intl";
-import {Link} from "@/i18n/navigation";
+import {useEffect, useState} from "react";
+import {SettingStatus} from "@/component/modalContent/adminSetting/AdminSetting.type";
+import AdminSettingConsoleContent from "@/component/modalContent/adminSetting/console/AdminSettingConsoleContent";
+import {notFound} from "next/navigation";
+import AdminSettingChangePwContent from "@/component/modalContent/adminSetting/chagePw/AdminSettingChangePwContent";
 
-export default () => {
-    const t = useTranslations("modal.admin.setting");
-    return (
-        <AdminSettingSection>
-            <AdminAuthButton>{t('changePassword')}</AdminAuthButton>
-            <AdminAuthButton>{t('adminChange')}</AdminAuthButton>
-            <Link href="/queue">
-                <AdminAuthButton>{t('logout')}</AdminAuthButton>
-            </Link>
-        </AdminSettingSection>
-    )
+interface AdminSettingProp {
+    hiddenModal: boolean;
+}
+
+export default ({hiddenModal}: AdminSettingProp) => {
+    const [settingStatus, setSettingStatus] = useState<SettingStatus>("console");
+    useEffect(() => {
+        setSettingStatus("console");
+    }, [hiddenModal]);
+    switch (settingStatus) {
+        case "console":
+            return <AdminSettingConsoleContent setSettingStatus={setSettingStatus}/>
+        case "changePw":
+            return <AdminSettingChangePwContent setSettingStatus={setSettingStatus}/>
+        case "changePwDone":
+            return <></>
+        case "adminChange":
+            return <></>
+        case "adminChangeDenied":
+            return <></>
+        case "addAdmin":
+            return <></>
+        case "addAdminDone":
+            return <></>
+        case "removeAdmin":
+            return <></>
+        case "removeAdminDone":
+            return <></>
+        case "removeCeoDenied":
+            return <></>
+        default:
+            notFound();
+    }
 }

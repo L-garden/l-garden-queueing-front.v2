@@ -21,15 +21,27 @@
   "modal": {
     "admin": {
       "setting": {
-        "changePassword": "Change P/W",
-        "adminChange": "Admin Change",
-        "logout": "Logout"
+        "console": {
+          "changePassword": "Change PW",
+          "adminChange": "Admin Change",
+          "logout": "Logout"
+        },
+        "changePw": {
+          "id": "id",
+          "idPlaceholder": "id",
+          "pw": "PW",
+          "pwPlaceholder": "pw",
+          "pwCheck": "PW check",
+          "pwCheckPlaceholder": "pw check",
+          "changePw": "Change PW",
+          "pwNotMatchAlert": "PW not matches"
+        }
       }
     },
     "customer": {
       "loginForm": {
         "id": "ID",
-        "pw": "P/W",
+        "pw": "PW",
         "signIn": "sign in"
       }
     },

@@ -29,7 +29,7 @@ export default ({isAdmin}: AdminButtonProp) => {
             >
                 {
                     isAdmin ?
-                        <AdminSettingContent/>
+                        <AdminSettingContent hiddenModal={hiddenModal}/>
                         :
                         <LoginFormContent/>
                 }
