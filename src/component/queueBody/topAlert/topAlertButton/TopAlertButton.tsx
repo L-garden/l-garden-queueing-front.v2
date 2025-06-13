@@ -27,6 +27,9 @@ export default ({isAdmin, orderDone, myOrderNo, setMyBellNo}: TopAlertButtonProp
         setMyBellNo(bellNo);
         setHiddenModal(true);
     }
+    const registerBellRelease = () => {
+        setMyBellNo(undefined);
+    }
 
     if (isAdmin) {
         const t = useTranslations("topAlert.admin");
@@ -45,14 +48,14 @@ export default ({isAdmin, orderDone, myOrderNo, setMyBellNo}: TopAlertButtonProp
     const t = useTranslations("topAlert.customer");
     if (orderDone) {
         return (
-            <TopAlertButton>
+            <TopAlertButton onClick={registerBellRelease}>
                 {t(`orderDone`)}
             </TopAlertButton>
         )
     }
     if (myOrderNo) {
         return (
-            <TopAlertButton>
+            <TopAlertButton onClick={registerBellRelease}>
                 {t(`queueing`, {bellNo: myOrderNo})}
             </TopAlertButton>
         )
