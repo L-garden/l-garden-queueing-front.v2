@@ -28,7 +28,7 @@ export default async function LocaleLayout(
     }
     setRequestLocale(locale);
     return (
-        <html lang={locale}>
+        <html lang={locale} suppressHydrationWarning>
         <body>
         <NextIntlClientProvider>
             {children}
