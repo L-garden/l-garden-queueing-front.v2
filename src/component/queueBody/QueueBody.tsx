@@ -5,6 +5,7 @@ import {QueueBodySection} from "@/component/queueBody/queueBody.style";
 import {useEffect, useState} from "react";
 import {BellData} from "@/component/queueBody/types/Bell";
 import {bellListApi} from "@/api/rest/bell/BellApi";
+import {useBellStompClient} from "@/api/stomp/bell/BellStomp";
 
 interface QueueBodyProp {
     isAdmin?: boolean
@@ -17,6 +18,7 @@ export default ({isAdmin}: QueueBodyProp) => {
     const [myBellNo, setMyBellNo] = useState<number | undefined>();
     const [myOrderNo, setMyOrderNo] = useState<number | undefined>();
     const [orderDone, setOrderDone] = useState<boolean>(false);
+    useBellStompClient(setBellList);
     useEffect(() => {
         bellListApi().then((bellInfoResponseSlice) => {
             setBellList(bellInfoResponseSlice.content);
@@ -25,9 +27,9 @@ export default ({isAdmin}: QueueBodyProp) => {
     useEffect(() => {
         setOrderDone(false);
         setMyOrderNo(undefined);
-        bellList.reverse().forEach((bellData, index) => {
+        bellList.toReversed().forEach((bellData, index) => {
             if (bellData.bellNum === myBellNo) {
-                setMyOrderNo(index + 1);
+                setMyOrderNo(bellList.length - index);
                 if (bellData.bellStatus === 'DONE') {
                     setOrderDone(true);
                 }

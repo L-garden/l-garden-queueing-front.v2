@@ -1,0 +1,1 @@
+export type BellEvent = 'BELL_ENQUEUE' | 'BELL_STATUS_CHANGED' | 'ORDER_DELETED';

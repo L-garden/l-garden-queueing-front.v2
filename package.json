@@ -1,9 +1,9 @@
 {
   "name": "l-garden-queueing-front.v2",
-  "version": "0.14.2",
+  "version": "0.14.3",
   "private": true,
   "scripts": {
-    "dev": "env-cmd -f env/.env.dev next dev --turbopack",
+    "dev": "env-cmd -f env/.env.dev next dev --turbo",
     "build:onprem": "env-cmd -f env/.env.onprem next build",
     "start": "next start",
     "lint": "next lint"
