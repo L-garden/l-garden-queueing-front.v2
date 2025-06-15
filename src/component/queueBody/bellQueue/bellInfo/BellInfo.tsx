@@ -18,10 +18,10 @@ export default ({isAdmin, bellData, isMine}: BellInfoProp) => {
     const t = useTranslations("bellQueue");
     return (
         <BellInfoSection $isAdmin={isAdmin == true} $isMine={isMine}>
-            <BellInfoSectionOverlay $isDone={bellData.isDone} $isAdmin={isAdmin == true}>
+            <BellInfoSectionOverlay $isDone={bellData.bellStatus === 'DONE'} $isAdmin={isAdmin == true}>
                 <BellInfoDiv $isMine={isMine}>
                     <BellInfoDetail>{t('bell')}</BellInfoDetail>
-                    <BellInfoDetail>{padSingleDigit(bellData.bellNo)}</BellInfoDetail>
+                    <BellInfoDetail>{padSingleDigit(bellData.bellNum)}</BellInfoDetail>
                 </BellInfoDiv>
                 {
                     isAdmin ? <BellAdmin/> : <></>

@@ -17,7 +17,7 @@ export default ({isAdmin, bellList, myBellNo}: QueueListProp) => {
                         isAdmin={isAdmin}
                         key={index}
                         bellData={bellData}
-                        isMine={bellData.bellNo === myBellNo}
+                        isMine={bellData.bellNum === myBellNo}
                     />
                 )
             }

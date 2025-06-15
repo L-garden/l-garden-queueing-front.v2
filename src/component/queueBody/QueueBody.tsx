@@ -4,47 +4,31 @@ import Queue from "@/component/queueBody/bellQueue/BellQueue";
 import {QueueBodySection} from "@/component/queueBody/queueBody.style";
 import {useEffect, useState} from "react";
 import {BellData} from "@/component/queueBody/types/Bell";
+import {bellListApi} from "@/api/rest/bell/BellApi";
 
 interface QueueBodyProp {
     isAdmin?: boolean
 }
 
-const initBellList: BellData[] = [
-    {
-        bellNo: 2,
-        createdAt: new Date(Date.now() - 10 * 60 * 1000),
-        isDone: true
-    },
-    {
-        bellNo: 1,
-        createdAt: new Date(Date.now() - 5 * 60 * 1000),
-        isDone: true
-    },
-    {
-        bellNo: 3,
-        createdAt: new Date(Date.now() - 40 * 1000),
-        isDone: false
-    },
-    {
-        bellNo: 7,
-        createdAt: new Date(),
-        isDone: false
-    },
-];
+const initBellList: BellData[] = [];
 
 export default ({isAdmin}: QueueBodyProp) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [bellList, setBellList] = useState<BellData[]>(initBellList);
     const [myBellNo, setMyBellNo] = useState<number | undefined>();
     const [myOrderNo, setMyOrderNo] = useState<number | undefined>();
     const [orderDone, setOrderDone] = useState<boolean>(false);
     useEffect(() => {
+        bellListApi().then((bellInfoResponseSlice) => {
+            setBellList(bellInfoResponseSlice.content);
+        });
+    }, []);
+    useEffect(() => {
         setOrderDone(false);
         setMyOrderNo(undefined);
-        bellList.forEach((bellData, index) => {
-            if (bellData.bellNo === myBellNo) {
+        bellList.reverse().forEach((bellData, index) => {
+            if (bellData.bellNum === myBellNo) {
                 setMyOrderNo(index + 1);
-                if (bellData.isDone) {
+                if (bellData.bellStatus === 'DONE') {
                     setOrderDone(true);
                 }
             }

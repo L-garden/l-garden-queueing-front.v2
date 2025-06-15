@@ -1,5 +1,7 @@
 export interface BellData {
-    bellNo: number;
+    bellId: number;
+    bellNum: number;
+    bellStatus: 'WAITING' | 'DONE';
+    modifiedAt: Date;
     createdAt: Date;
-    isDone: boolean;
 }
