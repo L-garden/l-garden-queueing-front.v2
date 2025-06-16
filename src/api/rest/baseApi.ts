@@ -4,12 +4,17 @@ import {ResponseFormat} from "@/api/rest/ResponseFormat";
 export const baseGet = (path: string): Promise<ResponseFormat> => {
     return fetch(`${SERVER_URL}${path}`, {
         method: 'GET'
-    }).then((response) => {
+    }).then(async (response) => {
+        const responseBody = await response.json() as ResponseFormat;
         if (!response.ok) {
-            console.log("백엔드 통신 에러", response.status, response.statusText);
-            throw new Error('백엔드 통신 에러');
+            if (responseBody.code && responseBody.message) {
+                return responseBody;
+            } else {
+                console.log("백엔드 통신 에러", response.status, response.statusText, response);
+                throw new Error('백엔드 통신 에러');
+            }
         }
-        return response.json();
+        return responseBody;
     });
 }
 
@@ -43,23 +48,33 @@ export const basePatch = (path: string, body: any): Promise<ResponseFormat> => {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(body),
-    }).then((response) => {
+    }).then(async (response) => {
+        const responseBody = await response.json() as ResponseFormat;
         if (!response.ok) {
-            console.log("백엔드 통신 에러", response.status, response.statusText);
-            throw new Error('백엔드 통신 에러');
+            if (responseBody.code && responseBody.message) {
+                return responseBody;
+            } else {
+                console.log("백엔드 통신 에러", response.status, response.statusText, response);
+                throw new Error('백엔드 통신 에러');
+            }
         }
-        return response.json();
+        return responseBody;
     });
 }
 
 export const baseDelete = (path: string): Promise<ResponseFormat> => {
     return fetch(`${SERVER_URL}${path}`, {
         method: 'DELETE'
-    }).then((response) => {
+    }).then(async (response) => {
+        const responseBody = await response.json() as ResponseFormat;
         if (!response.ok) {
-            console.log("백엔드 통신 에러", response.status, response.statusText);
-            throw new Error('백엔드 통신 에러');
+            if (responseBody.code && responseBody.message) {
+                return responseBody;
+            } else {
+                console.log("백엔드 통신 에러", response.status, response.statusText, response);
+                throw new Error('백엔드 통신 에러');
+            }
         }
-        return response.json();
+        return responseBody;
     });
 }
