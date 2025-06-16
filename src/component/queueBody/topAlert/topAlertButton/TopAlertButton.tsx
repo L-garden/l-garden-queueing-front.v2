@@ -3,6 +3,7 @@ import {TopAlertButton} from "@/component/queueBody/topAlert/topAlertButton/topA
 import {Dispatch, MouseEvent, SetStateAction, useState} from "react";
 import CustomModal from "@/component/common/CustomModal";
 import RegisterBellContent from "@/component/modalContent/registerBell/RegisterBellContent";
+import {adminBellEnqueueApi} from "@/api/rest/bell/BellAdminApi";
 
 interface TopAlertButtonProp {
     isAdmin?: boolean;
@@ -20,8 +21,9 @@ export default ({isAdmin, orderDone, myOrderNo, setMyBellNo}: TopAlertButtonProp
         e.stopPropagation();
         setHiddenModal(true);
     }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const registerBellByAdmin = (bellNo: number) => {
+        adminBellEnqueueApi(bellNo);
+        setHiddenModal(true);
     }
     const registerBellByCustomer = (bellNo: number) => {
         setMyBellNo(bellNo);
