@@ -3,14 +3,13 @@ import {HeaderSection} from "@/component/header/header.style";
 import AdminButton from "@/component/header/adminButton/AdminButton";
 
 interface HeaderProps {
-    userName?: string;
     isAdmin?: boolean;
 }
 
-export default ({userName, isAdmin}: HeaderProps) => {
+export default ({isAdmin}: HeaderProps) => {
     return (
         <HeaderSection>
-            <Title userName={userName}/>
+            <Title/>
             <AdminButton isAdmin={isAdmin}/>
         </HeaderSection>
     )

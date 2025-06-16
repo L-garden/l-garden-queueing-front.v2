@@ -1,8 +1,10 @@
 import {AccessRefreshToken} from "@/api/dto/admins/TokenDto";
+import {AdminRole} from "@/component/modalContent/adminSetting/AdminSetting.type";
 
 export interface AdminsInfoResponse {
-    id: number,
-    name: string,
+    adminId: number,
+    adminName: string,
+    adminRole: AdminRole
     createdAt: Date,
 }
 
