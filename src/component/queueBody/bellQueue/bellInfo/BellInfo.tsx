@@ -24,7 +24,7 @@ export default ({isAdmin, bellData, isMine}: BellInfoProp) => {
                     <BellInfoDetail>{padSingleDigit(bellData.bellNum)}</BellInfoDetail>
                 </BellInfoDiv>
                 {
-                    isAdmin ? <BellAdmin/> : <></>
+                    isAdmin ? <BellAdmin bellData={bellData}/> : <></>
                 }
             </BellInfoSectionOverlay>
         </BellInfoSection>
