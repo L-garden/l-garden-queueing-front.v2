@@ -12,3 +12,7 @@ export interface AdminTokenNAdminsResponse {
     adminsInfo: AdminsInfoResponse,
     tokens: AccessRefreshToken,
 }
+
+export interface AdminsIdResponse {
+    id: string,
+}
