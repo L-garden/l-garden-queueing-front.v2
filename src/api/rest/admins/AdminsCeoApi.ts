@@ -16,6 +16,9 @@ export const ceoAdminsRegisterApi = (request: AdminRegisterRequest): Promise<boo
 
 export const ceoAdminsAdminDeleteApi = (adminId: number): Promise<boolean> => {
     return baseAuthDelete(`${ENDPOINT_ADMINS_CEO}/${adminId}`).then((response) => {
+        if (response.code !== "OK") {
+            throw response.code;
+        }
         return response.data as boolean;
     })
 }

@@ -55,7 +55,9 @@
           "addAdmin": "Add Admin",
           "done": "{name}\nAdded",
           "unknown": "Unknown",
-          "back": "back"
+          "back": "back",
+          "ALREADY_USED_ID": "This ID is already in use",
+          "NO_SUCH_ADMIN": "No matching user found"
         },
         "removeAdmin": {
           "removeButton": "remove",

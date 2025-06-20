@@ -7,7 +7,7 @@ import {
     ModalSection
 } from "@/component/modalContent/styles/modalNormal.style";
 import {useTranslations} from "next-intl";
-import {ceoAdminsAdminListApi} from "@/api/rest/admins/AdminsCeoApi";
+import {ceoAdminsAdminDeleteApi, ceoAdminsAdminListApi} from "@/api/rest/admins/AdminsCeoApi";
 import {Slice} from "@/api/rest/ResponseFormat";
 
 export default ({setSettingStatus, setAdminName, setModalWidth, setModalHeight}: SetSettingStatusProp) => {
@@ -30,13 +30,20 @@ export default ({setSettingStatus, setAdminName, setModalWidth, setModalHeight}:
     }, [setModalWidth, setModalHeight]);
 
     const onClick = useCallback((adminInfo: AdminInfo) => {
-        if (adminInfo.adminRole === "CEO") {
+        if (adminInfo.adminRole === "CEO" || adminInfo.adminRole === "DEVELOPER") {
             setAdminName?.(adminInfo.adminName);
             setSettingStatus("removeCeoDenied");
             return;
         }
-        setAdminName?.(adminInfo.adminName);
-        setSettingStatus("removeAdminDone");
+        ceoAdminsAdminDeleteApi(adminInfo.adminId).then((isSuccess) => {
+            if (isSuccess) {
+                setAdminName?.(adminInfo.adminName);
+                setSettingStatus("removeAdminDone");
+                return;
+            }
+        }).catch((message) => {
+            alert(t(`${message}`));
+        })
     }, [setAdminName, setSettingStatus]);
     return (
         <ModalSection>
