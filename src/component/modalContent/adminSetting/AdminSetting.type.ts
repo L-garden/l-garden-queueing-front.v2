@@ -29,4 +29,5 @@ export interface AdminInfo {
     adminId: number;
     adminName: string;
     adminRole: AdminRole;
+    createdAt: Date;
 }
