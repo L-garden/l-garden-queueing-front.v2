@@ -5,9 +5,15 @@ import {setRequestLocale} from "next-intl/server";
 import {routing} from "@/i18n/routing";
 import {notFound} from "next/navigation";
 import {hasLocale} from "use-intl";
+import * as Sentry from '@sentry/nextjs';
 
-export const metadata: Metadata = {
-    title: "엘가든",
+export function generateMetadata(): Metadata {
+    return {
+        title: "엘가든",
+        other: {
+            ...Sentry.getTraceData(),
+        }
+    }
 };
 
 export function generateStaticParams() {
