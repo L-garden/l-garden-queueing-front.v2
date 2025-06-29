@@ -48,3 +48,5 @@ next-env.d.ts
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+# Sentry Config File
+.env.sentry-build-plugin

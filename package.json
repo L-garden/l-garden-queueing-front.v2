@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@sentry/nextjs": "^9.32.0",
     "@stomp/stompjs": "^7.1.1",
     "@types/sockjs-client": "^1.5.4",
     "@types/stompjs": "^2.3.9",
