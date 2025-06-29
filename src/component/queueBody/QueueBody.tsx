@@ -1,19 +1,22 @@
 'use client'
 import TopAlert from "@/component/queueBody/topAlert/TopAlert";
 import Queue from "@/component/queueBody/bellQueue/BellQueue";
-import {QueueBodySection} from "@/component/queueBody/queueBody.style";
-import {useEffect, useState} from "react";
+import {QueueBellTitle, QueueBodySection} from "@/component/queueBody/queueBody.style";
+import {Dispatch, SetStateAction, useEffect, useState} from "react";
 import {BellData} from "@/component/queueBody/types/Bell";
 import {bellListApi} from "@/api/rest/bell/BellApi";
 import {useBellStompClient} from "@/api/stomp/bell/BellStomp";
 
 interface QueueBodyProp {
-    isAdmin?: boolean
+    isAdmin?: boolean;
+    onMenu?: boolean;
+    anyQueue?: boolean;
+    setAnyQueue?: Dispatch<SetStateAction<boolean>>;
 }
 
 const initBellList: BellData[] = [];
 
-export default ({isAdmin}: QueueBodyProp) => {
+export default ({isAdmin, onMenu = false, anyQueue, setAnyQueue}: QueueBodyProp) => {
     const [bellList, setBellList] = useState<BellData[]>(initBellList);
     const [myBellNo, setMyBellNo] = useState<number | undefined>();
     const [myOrderNo, setMyOrderNo] = useState<number | undefined>();
@@ -36,10 +39,27 @@ export default ({isAdmin}: QueueBodyProp) => {
             }
         })
     }, [bellList, myBellNo]);
+    useEffect(() => {
+        if (setAnyQueue) {
+            if (bellList.length > 0) {
+                setAnyQueue(true);
+            } else {
+                setAnyQueue(false);
+            }
+        }
+    }, [bellList]);
+    if (anyQueue !== undefined && !anyQueue)
+        return <></>;
     return (
-        <QueueBodySection>
-            <TopAlert isAdmin={isAdmin} orderDone={orderDone} myOrderNo={myOrderNo} setMyBellNo={setMyBellNo}/>
-            <Queue isAdmin={isAdmin} bellList={bellList} myBellNo={myBellNo}/>
+        <QueueBodySection $onMenu={onMenu}>
+            {
+                onMenu ?
+                    <QueueBellTitle>
+                        진동벨 번호
+                    </QueueBellTitle> :
+                    <TopAlert isAdmin={isAdmin} orderDone={orderDone} myOrderNo={myOrderNo} setMyBellNo={setMyBellNo}/>
+            }
+            <Queue isAdmin={isAdmin} bellList={bellList} myBellNo={myBellNo} onMenu={onMenu}/>
         </QueueBodySection>
     );
 }

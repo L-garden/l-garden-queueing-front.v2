@@ -12,15 +12,19 @@ interface BellInfoProp {
     isAdmin?: boolean;
     bellData: BellData;
     isMine: boolean;
+    onMenu: boolean;
 }
 
-export default ({isAdmin, bellData, isMine}: BellInfoProp) => {
+export default ({isAdmin, bellData, isMine, onMenu}: BellInfoProp) => {
     const t = useTranslations("bellQueue");
     return (
         <BellInfoSection $isAdmin={isAdmin == true} $isMine={isMine}>
             <BellInfoSectionOverlay $isDone={bellData.bellStatus === 'DONE'} $isAdmin={isAdmin == true}>
                 <BellInfoDiv $isMine={isMine}>
-                    <BellInfoDetail>{t('bell')}</BellInfoDetail>
+                    {
+                        onMenu ? <></> :
+                            <BellInfoDetail>{t('bell')}</BellInfoDetail>
+                    }
                     <BellInfoDetail>{padSingleDigit(bellData.bellNum)}</BellInfoDetail>
                 </BellInfoDiv>
                 {

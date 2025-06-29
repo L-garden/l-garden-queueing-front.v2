@@ -1,16 +1,18 @@
 import BellInfo from "@/component/queueBody/bellQueue/bellInfo/BellInfo";
-import {BellListSection} from "@/component/queueBody/bellQueue/bellQueue.style";
+import {BellListHeadHr, BellListSection} from "@/component/queueBody/bellQueue/bellQueue.style";
 import {BellData} from "@/component/queueBody/types/Bell";
 
 interface QueueListProp {
     isAdmin?: boolean;
     bellList?: BellData[];
     myBellNo?: number;
+    onMenu: boolean;
 }
 
-export default ({isAdmin, bellList, myBellNo}: QueueListProp) => {
+export default ({isAdmin, bellList, myBellNo, onMenu}: QueueListProp) => {
     return (
         <BellListSection>
+            <BellListHeadHr/>
             {
                 bellList?.map((bellData, index) =>
                     <BellInfo
@@ -18,6 +20,7 @@ export default ({isAdmin, bellList, myBellNo}: QueueListProp) => {
                         key={index}
                         bellData={bellData}
                         isMine={bellData.bellNum === myBellNo}
+                        onMenu={onMenu}
                     />
                 )
             }
