@@ -27,7 +27,7 @@ export default ({isAdmin}: QueueBodyProp) => {
     useEffect(() => {
         setOrderDone(false);
         setMyOrderNo(undefined);
-        bellList.toReversed().forEach((bellData, index) => {
+        bellList.slice().reverse().forEach((bellData, index) => {
             if (bellData.bellNum === myBellNo) {
                 setMyOrderNo(bellList.length - index);
                 if (bellData.bellStatus === 'DONE') {
