@@ -6,6 +6,7 @@ import {routing} from "@/i18n/routing";
 import {notFound} from "next/navigation";
 import {hasLocale} from "use-intl";
 import * as Sentry from '@sentry/nextjs';
+import {FontFamilyProvider} from "@/app/[locale]/layout.style";
 
 export function generateMetadata(): Metadata {
     return {
@@ -37,7 +38,9 @@ export default async function LocaleLayout(
         <html lang={locale} suppressHydrationWarning>
         <body>
         <NextIntlClientProvider>
-            {children}
+            <FontFamilyProvider>
+                {children}
+            </FontFamilyProvider>
         </NextIntlClientProvider>
         </body>
         </html>
